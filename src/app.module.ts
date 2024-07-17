@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
-import { CatsModule } from './cats/cats.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Cat } from './cats/entities/cat.entity';
+import { CatsModule } from './cats/cats.module';
+import { BreedsModule } from './breeds/breeds.module';
+import { Breed } from './breeds/entities/breed.entity';
 
 @Module({
   imports: [
-    CatsModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -13,9 +14,11 @@ import { Cat } from './cats/entities/cat.entity';
       username: 'user',
       password: 'root',
       database: 'db',
-      entities: [Cat],
+      entities: [Cat, Breed],
       synchronize: true,
     }),
+    CatsModule,
+    BreedsModule,
   ],
   controllers: [],
   providers: [],
